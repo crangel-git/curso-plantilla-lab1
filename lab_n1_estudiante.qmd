@@ -31,7 +31,7 @@ una organización en **nivel 1 (Inicial / ad hoc)**.
 **Regla que no se negocia:** no modifiques el archivo de `datos/`. Toda corrección se
 hace en código.
 
----
+***
 
 ## Cómo leer el código de este documento
 
@@ -56,7 +56,7 @@ instrucciones para R.
 > **Los bloques se ejecutan en orden, de arriba hacia abajo.** Cada uno depende de los
 > anteriores: si saltan uno, los siguientes fallarán porque les faltará un objeto.
 
----
+***
 
 ## Preparación del entorno
 
@@ -94,7 +94,7 @@ sin_tilde <- function(x) stringi::stri_trans_general(x, "Latin-ASCII")
 vacio <- function(x) is.na(x) | trimws(as.character(x)) == ""
 ```
 
----
+***
 
 ## Paso 1 · Abrir el archivo tal como llega
 
@@ -160,8 +160,10 @@ names(borrador)
 #
 #            filter() conserva las filas que cumplen una condición.
 #            str_detect(x, patron) responde TRUE si el texto encaja con el patrón.
-#            "^CT-\\d{5}$" se lee: inicio (^), las letras CT-, exactamente cinco
-#            dígitos (\\d{5}) y fin de la cadena ($). Nada más y nada menos.
+#            El patrón "^CT-\\d{5}" seguido del ancla de fin se lee así:
+#            ^ marca el inicio, CT- son esas tres letras literales, \\d{5} exige
+#            exactamente cinco dígitos, y el ancla final exige que ahí termine
+#            la cadena. Ni un carácter más.
 validos <- borrador |>
   filter(!vacio(id), str_detect(id, "^CT-\\d{5}$"))
 
@@ -176,7 +178,7 @@ corresponde?
 
 *Tu respuesta:*
 
----
+***
 
 ## Paso 2 · Diagnóstico de calidad
 
@@ -250,7 +252,7 @@ kable(validez)
 # n_distinct() cuenta valores diferentes; duplicated() marca las repeticiones
 # posteriores a la primera aparición, y sum() las cuenta.
 cat("Registros:              ", nrow(validos), "\n")
-cat("Identificadores únicos: ", n_distinct(validos$id), "\n")   # $ toma una columna
+cat("Identificadores únicos: ", n_distinct(validos$id), "\n")   # el signo toma una columna
 cat("IDs repetidos:          ", sum(duplicated(validos$id)), "\n")
 cat("Filas idénticas:        ", sum(duplicated(validos)), "\n")
 ```
@@ -298,7 +300,7 @@ el dato, o de la organización?
 
 *Tu respuesta:*
 
----
+***
 ## Paso 3 · Limpieza reproducible
 
 Hasta aquí solo observamos. Ahora corregimos — **en código, nunca sobre el archivo**.
@@ -372,7 +374,7 @@ indica eso sobre lo que la limpieza **puede** y **no puede** corregir?
 
 *Tu respuesta:*
 
----
+***
 
 ## Paso 4 · Diccionario de datos
 
@@ -392,7 +394,7 @@ revela eso sobre el estado de gobierno de esta organización?
 
 *Tu respuesta:*
 
----
+***
 
 ## Paso 5 · Plan de gobierno mínimo viable
 
@@ -417,7 +419,7 @@ corresponder al nivel de madurez de esta organización, y explica por qué.
 
 *Tu respuesta:*
 
----
+***
 
 ## Paso 6 · Entregar el dato limpio
 
@@ -471,7 +473,7 @@ rehacer a mano? **Esa parte manual es donde se interrumpe el linaje.**
 
 *Tu respuesta:*
 
----
+***
 
 ## Entrega
 
